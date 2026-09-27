@@ -10,15 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as MethodRouteImport } from './routes/method'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as LocaleMethodRouteImport } from './routes/$locale.method'
+import { Route as LocalePlanRouteImport } from './routes/$locale.plan'
+import { Route as LocalePricingRouteImport } from './routes/$locale.pricing'
+import { Route as LocalePrivacyRouteImport } from './routes/$locale.privacy'
+import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocaleRoute = LocaleRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MethodRoute = MethodRouteImport.update({
@@ -46,14 +58,51 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocaleIndexRoute = LocaleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleMethodRoute = LocaleMethodRouteImport.update({
+  id: '/method',
+  path: '/method',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePlanRoute = LocalePlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePricingRoute = LocalePricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePrivacyRoute = LocalePrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleTermsRoute = LocaleTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => LocaleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$locale': typeof LocaleRouteWithChildren
   '/method': typeof MethodRoute
   '/plan': typeof PlanRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/$locale/method': typeof LocaleMethodRoute
+  '/$locale/plan': typeof LocalePlanRoute
+  '/$locale/pricing': typeof LocalePricingRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/': typeof LocaleIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,27 +111,79 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/$locale/method': typeof LocaleMethodRoute
+  '/$locale/plan': typeof LocalePlanRoute
+  '/$locale/pricing': typeof LocalePricingRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale': typeof LocaleIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$locale': typeof LocaleRouteWithChildren
   '/method': typeof MethodRoute
   '/plan': typeof PlanRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/$locale/method': typeof LocaleMethodRoute
+  '/$locale/plan': typeof LocalePlanRoute
+  '/$locale/pricing': typeof LocalePricingRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/': typeof LocaleIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/method' | '/plan' | '/pricing' | '/privacy' | '/terms'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/method'
+    | '/plan'
+    | '/pricing'
+    | '/privacy'
+    | '/terms'
+    | '/$locale/method'
+    | '/$locale/plan'
+    | '/$locale/pricing'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/method' | '/plan' | '/pricing' | '/privacy' | '/terms'
+  to:
+    | '/'
+    | '/method'
+    | '/plan'
+    | '/pricing'
+    | '/privacy'
+    | '/terms'
+    | '/$locale/method'
+    | '/$locale/plan'
+    | '/$locale/pricing'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale'
   id:
-    '__root__' | '/' | '/method' | '/plan' | '/pricing' | '/privacy' | '/terms'
+    | '__root__'
+    | '/'
+    | '/$locale'
+    | '/method'
+    | '/plan'
+    | '/pricing'
+    | '/privacy'
+    | '/terms'
+    | '/$locale/method'
+    | '/$locale/plan'
+    | '/$locale/pricing'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LocaleRoute: typeof LocaleRouteWithChildren
   MethodRoute: typeof MethodRoute
   PlanRoute: typeof PlanRoute
   PricingRoute: typeof PricingRoute
@@ -97,6 +198,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$locale': {
+      id: '/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/method': {
@@ -134,11 +242,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$locale/': {
+      id: '/$locale/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/method': {
+      id: '/$locale/method'
+      path: '/method'
+      fullPath: '/$locale/method'
+      preLoaderRoute: typeof LocaleMethodRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/plan': {
+      id: '/$locale/plan'
+      path: '/plan'
+      fullPath: '/$locale/plan'
+      preLoaderRoute: typeof LocalePlanRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/pricing': {
+      id: '/$locale/pricing'
+      path: '/pricing'
+      fullPath: '/$locale/pricing'
+      preLoaderRoute: typeof LocalePricingRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/privacy': {
+      id: '/$locale/privacy'
+      path: '/privacy'
+      fullPath: '/$locale/privacy'
+      preLoaderRoute: typeof LocalePrivacyRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/terms': {
+      id: '/$locale/terms'
+      path: '/terms'
+      fullPath: '/$locale/terms'
+      preLoaderRoute: typeof LocaleTermsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
   }
 }
 
+interface LocaleRouteChildren {
+  LocaleMethodRoute: typeof LocaleMethodRoute
+  LocalePlanRoute: typeof LocalePlanRoute
+  LocalePricingRoute: typeof LocalePricingRoute
+  LocalePrivacyRoute: typeof LocalePrivacyRoute
+  LocaleTermsRoute: typeof LocaleTermsRoute
+  LocaleIndexRoute: typeof LocaleIndexRoute
+}
+
+const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleMethodRoute: LocaleMethodRoute,
+  LocalePlanRoute: LocalePlanRoute,
+  LocalePricingRoute: LocalePricingRoute,
+  LocalePrivacyRoute: LocalePrivacyRoute,
+  LocaleTermsRoute: LocaleTermsRoute,
+  LocaleIndexRoute: LocaleIndexRoute,
+}
+
+const LocaleRouteWithChildren =
+  LocaleRoute._addFileChildren(LocaleRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LocaleRoute: LocaleRouteWithChildren,
   MethodRoute: MethodRoute,
   PlanRoute: PlanRoute,
   PricingRoute: PricingRoute,
