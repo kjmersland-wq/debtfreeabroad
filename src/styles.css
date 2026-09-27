@@ -75,7 +75,7 @@
   --surface: #eceae4;
   --surface-raised: #fcfbf8;
   --ink: #1c1c1c;
-  --ink-soft: rgb(28 28 28 / 0.82);
+  --ink-soft: rgb(28 28 28 / 0.88);
   --foreground: #1c1c1c;
   --card: #fcfbf8;
   --card-foreground: #1c1c1c;
@@ -88,7 +88,7 @@
   --secondary: #eceae4;
   --secondary-foreground: #1c1c1c;
   --muted: rgb(28 28 28 / 0.03);
-  --muted-foreground: rgb(28 28 28 / 0.4);
+  --muted-foreground: rgb(28 28 28 / 0.62);
   --accent: rgb(28 28 28 / 0.04);
   --accent-foreground: #1c1c1c;
   --destructive: oklch(0.505 0.16 27);
@@ -208,7 +208,7 @@
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgb(28 28 28 / 0.4);
+  color: rgb(28 28 28 / 0.6);
   margin-bottom: 0.4rem;
 }
 
