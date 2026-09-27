@@ -2,12 +2,14 @@ import type { ReactNode } from "react";
 import type { Dict, Locale } from "@/i18n";
 import { AppLink, type AppPath } from "@/lib/locale";
 import { LocaleSwitch } from "./LocaleSwitch";
+import logo from "@/assets/logo-a.png";
 
 function Nav({ locale, t, path }: { locale: Locale; t: Dict; path: AppPath }) {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background">
       <div className="mx-auto flex h-16 w-full max-w-(--container-content) items-center justify-between px-5">
-        <AppLink to="/" locale={locale} className="font-display text-lg font-semibold tracking-[-0.04em]">
+        <AppLink to="/" locale={locale} className="flex items-center gap-2.5 font-display text-lg font-semibold tracking-[-0.04em]">
+          <img src={logo} alt="" className="h-8 w-8" />
           DebtFree<span className="text-muted-foreground">Abroad</span>
         </AppLink>
         <div className="flex items-center gap-6">
@@ -35,7 +37,10 @@ function Footer({ locale, t }: { locale: Locale; t: Dict }) {
       <div className="mx-auto w-full max-w-(--container-content) px-5 py-10 text-sm text-muted-foreground">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <p className="text-foreground">
-            <span className="font-display text-2xl font-semibold tracking-[-0.04em]">DebtFreeAbroad</span>
+            <span className="flex items-center gap-3 font-display text-2xl font-semibold tracking-[-0.04em]">
+              <img src={logo} alt="" className="h-9 w-9" />
+              DebtFreeAbroad
+            </span>
             <span className="ml-3 text-muted-foreground">{t.footer.brand}</span>
           </p>
           <div className="flex flex-wrap items-center gap-5">
