@@ -64,7 +64,7 @@ function Timeline({
 
   return (
     <div className="mt-8">
-      <h3 className="text-sm tracking-wide text-ink-soft uppercase">{t.result.timeline}</h3>
+      <h3 className="field-label">{t.result.timeline}</h3>
       <div className="mt-4 space-y-4">
         {[1, 2, 3, 4, 5].map((year) => {
           const h = at(result.home.payoff.balanceByMonth, year);
@@ -78,16 +78,16 @@ function Timeline({
               </div>
               <div className="mt-1.5 space-y-1.5">
                 {[
-                  { label: t.result.home, v: h, cls: "bg-border-strong" },
+                  { label: t.result.home, v: h, cls: "bg-muted-foreground" },
                   { label: t.result.away, v: a, cls: "bg-forest" },
                 ].map((bar) => (
                   <div key={bar.label} className="flex items-center gap-3">
                     <span className="w-16 shrink-0 text-xs text-muted-foreground">
                       {bar.label}
                     </span>
-                    <div className="h-2.5 flex-1 rounded-xs bg-secondary">
+                    <div className="h-2.5 flex-1 rounded-full bg-surface">
                       <div
-                        className={`h-full rounded-xs ${bar.cls} transition-[width] duration-200`}
+                        className={`h-full rounded-full ${bar.cls} transition-[width] duration-200`}
                         style={{ width: `${Math.min(100, (bar.v / start) * 100)}%` }}
                       />
                     </div>
@@ -136,8 +136,8 @@ export function ResultReceipt({
         : t.result.advLarge;
 
   return (
-    <section aria-live="polite" className="paper-card p-6 sm:p-8">
-      <p className="text-xs tracking-[0.14em] text-muted-foreground uppercase">
+    <section aria-live="polite">
+      <p className="field-label">
         {t.result.title} — {baselines[from].name} → {baselines[to].name}
       </p>
 
@@ -145,12 +145,18 @@ export function ResultReceipt({
         <p className="mt-6 text-base text-ink-soft">{t.result.noDebts}</p>
       ) : (
         <>
-          <div className="mt-6 flex items-end gap-4">
-            <span className="num font-display text-6xl leading-none text-forest sm:text-7xl">
+          <div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-3">
+            <span className="num font-display text-[120px] leading-[0.85] font-semibold tracking-[-0.06em] text-foreground sm:text-[160px]">
               {result.monthsSaved > 0 ? saved : "0"}
             </span>
-            <span className="pb-2 text-sm text-ink-soft">
+            <span className="text-sm text-ink-soft">
               {t.result.monthsSaved.toLowerCase()}
+            </span>
+            <span className="pill-secondary h-6 px-2.5 text-[11px] tracking-[0.12em] uppercase">
+              {t.hero.chipPrivate}
+            </span>
+            <span className="pill-secondary h-6 px-2.5 text-[11px] tracking-[0.12em] uppercase">
+              {t.hero.chipNoAi}
             </span>
           </div>
           <p className="mt-3 max-w-md text-sm text-ink-soft">{advice}</p>
@@ -191,7 +197,7 @@ export function ResultReceipt({
           <Timeline t={t} result={result} currency={currency} numberLocale={numberLocale} />
 
           <div className="mt-8 rule-top pt-4">
-            <h3 className="text-xs tracking-[0.14em] text-muted-foreground uppercase">
+            <h3 className="field-label">
               {t.result.inputsUsed}
             </h3>
             <dl className="mt-3 grid gap-2 text-sm text-ink-soft sm:grid-cols-2">
@@ -237,7 +243,7 @@ export function ResultReceipt({
       </p>
       <p className="mt-3 text-sm text-muted-foreground">
         {t.result.disclaimer}{" "}
-        <AppLink to="/method" locale={locale} className="text-forest underline underline-offset-4">
+        <AppLink to="/method" locale={locale} className="text-foreground underline underline-offset-4">
           {t.result.methodLink}
         </AppLink>
       </p>
