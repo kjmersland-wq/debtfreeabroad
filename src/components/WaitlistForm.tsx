@@ -22,19 +22,19 @@ export function WaitlistForm({ t }: { t: Dict }) {
           id="waitlist-email"
           type="email"
           required
-          className="field-input"
+          className="field-input rounded-full px-5"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="name@example.com"
         />
         <button
           type="submit"
-          className="shrink-0 rounded-sm bg-primary px-4 py-2 text-sm text-primary-foreground transition-opacity hover:opacity-90"
+          className="pill-primary shrink-0"
         >
           {t.pricing.joinWaitlist}
         </button>
       </div>
-      {done && <p className="mt-2 text-sm text-forest">{t.pricing.thanks}</p>}
+      {done && <p className="mt-2 text-sm text-foreground">{t.pricing.thanks}</p>}
     </form>
   );
 }

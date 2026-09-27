@@ -14,7 +14,7 @@ export function LocaleSwitch({ current, path }: { current: Locale; path: AppPath
             locale={l}
             className={
               l === current
-                ? "text-forest underline underline-offset-4"
+                ? "text-foreground underline underline-offset-4"
                 : "text-muted-foreground hover:text-foreground"
             }
           >

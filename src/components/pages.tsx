@@ -7,11 +7,11 @@ import { baselines, destinationCountries, originCountries } from "@/data/costBas
 export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
   return (
     <>
-      <section className="pt-20 pb-14">
-        <p className="text-xs tracking-[0.16em] text-muted-foreground uppercase">
+      <section className="pt-24 pb-16">
+        <p className="field-label">
           KM Tech Labs
         </p>
-        <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[1.05] text-foreground sm:text-6xl">
+        <h1 className="mt-5 max-w-3xl font-display text-[56px] leading-[1.0] tracking-[-0.05em] text-foreground lg:text-[72px]">
           {t.hero.headline}
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">{t.hero.sub}</p>
@@ -19,7 +19,7 @@ export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
 
       <Calculator t={t} locale={locale} />
 
-      <section className="mt-24">
+      <section className="mt-24 py-24 rule-top">
         <h2 className="font-display text-3xl">{t.notWhat.title}</h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
           {[t.notWhat.a, t.notWhat.b, t.notWhat.c].map((line, i) => (
@@ -30,19 +30,19 @@ export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
         </div>
       </section>
 
-      <section className="mt-24 paper-card p-8">
+      <section className="mt-24 py-24 rule-top paper-card p-8">
         <h2 className="font-display text-3xl">{t.method.title}</h2>
         <p className="mt-3 max-w-xl text-ink-soft">{t.method.lead}</p>
         <AppLink
           to="/method"
           locale={locale}
-          className="mt-5 inline-block text-sm text-forest underline underline-offset-4"
+          className="mt-5 inline-block text-sm text-foreground underline underline-offset-4"
         >
           {t.result.methodLink}
         </AppLink>
       </section>
 
-      <section className="mt-24">
+      <section className="mt-24 py-24 rule-top">
         <PricingBlock t={t} />
       </section>
     </>

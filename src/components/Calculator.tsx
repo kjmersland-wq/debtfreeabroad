@@ -130,10 +130,10 @@ function Segmented<T extends string>({
             type="button"
             aria-pressed={value === o.value}
             onClick={() => onChange(o.value)}
-            className={`rounded-sm border px-2.5 py-1.5 text-sm transition-colors ${
+            className={`h-9 rounded-full border px-4 text-sm transition-opacity duration-[180ms] ${
               value === o.value
-                ? "border-forest bg-accent text-accent-foreground"
-                : "border-border-strong text-ink-soft hover:text-foreground"
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border-strong text-foreground hover:opacity-70"
             }`}
           >
             {o.label}
@@ -200,21 +200,12 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
   const hasDebts = s.debts.some((d) => d.balance > 0);
 
   return (
-    <div id="calculator" className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+    <div id="calculator" className="grid gap-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
       <form
-        className="paper-card p-6 sm:p-8 lg:sticky lg:top-20 lg:self-start"
+        className="order-2 lg:sticky lg:top-20 lg:self-start lg:border-l lg:border-border lg:pl-10"
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className="flex flex-wrap gap-2">
-          <span className="rounded-full border border-border-strong px-3 py-1 text-xs text-ink-soft">
-            {t.hero.chipPrivate}
-          </span>
-          <span className="rounded-full border border-border-strong px-3 py-1 text-xs text-ink-soft">
-            {t.hero.chipNoAi}
-          </span>
-        </div>
-
-        <h2 className="mt-6 text-xs tracking-[0.14em] text-muted-foreground uppercase">
+        <h2 className="field-label font-sans tracking-[0.12em]">
           {t.form.from}
         </h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
@@ -315,7 +306,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
 
         <DebtRows t={t} debts={s.debts} currency={s.currency} onChange={(d) => set("debts", d)} />
 
-        <h2 className="mt-8 text-xs tracking-[0.14em] text-muted-foreground uppercase">
+        <h2 className="mt-8 field-label font-sans">
           {t.form.to}
         </h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
@@ -360,7 +351,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
           <input
             id="keep-income"
             type="checkbox"
-            className="mt-1 size-4 accent-[var(--forest)]"
+            className="mt-1 size-4 accent-[var(--primary)]"
             checked={s.keepIncome}
             onChange={(e) => set("keepIncome", e.target.checked)}
           />
@@ -372,7 +363,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
           </label>
         </div>
 
-        <h2 className="mt-8 text-xs tracking-[0.14em] text-muted-foreground uppercase">
+        <h2 className="mt-8 field-label font-sans">
           {t.form.assumptions}
         </h2>
         <div className="mt-3">
@@ -392,13 +383,13 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
 
         <a
           href="#result"
-          className="mt-6 block rounded-sm bg-primary px-4 py-2.5 text-center text-sm text-primary-foreground lg:hidden"
+          className="pill-primary mt-6 w-full lg:hidden"
         >
           {t.result.title}
         </a>
       </form>
 
-      <div id="result" className="scroll-mt-20">
+      <div id="result" className="order-1 scroll-mt-20">
         <ResultReceipt
           t={t}
           locale={locale}

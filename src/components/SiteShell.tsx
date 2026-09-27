@@ -8,7 +8,7 @@ function Nav({ locale, t, path }: { locale: Locale; t: Dict; path: AppPath }) {
     <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-14 w-full max-w-(--container-content) items-center justify-between px-5">
         <AppLink to="/" locale={locale} className="font-display text-base tracking-tight">
-          DebtFree<span className="text-forest">Abroad</span>
+          DebtFree<span className="text-muted-foreground">Abroad</span>
         </AppLink>
         <div className="flex items-center gap-6">
           <nav className="hidden items-center gap-6 text-sm text-ink-soft sm:flex">
