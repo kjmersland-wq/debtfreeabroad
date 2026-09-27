@@ -18,7 +18,7 @@ function SectionHead({ index, title }: { index: string; title: string }) {
 export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
   return (
     <>
-      <section className="grid gap-10 pt-20 pb-16 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:pt-28 lg:pb-20">
+      <section className="grid gap-10 pt-14 pb-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:pt-20 lg:pb-14">
         <div>
           <p className="field-label">KM Tech Labs</p>
           <h1 className="mt-6 font-display text-[52px] leading-[0.98] tracking-[-0.055em] text-foreground sm:text-[64px] lg:text-[76px]">
@@ -38,7 +38,7 @@ export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
         </div>
       </section>
 
-      <div className="rule-top pt-16">
+      <div className="rule-top pt-12">
         <Calculator t={t} locale={locale} />
       </div>
 
