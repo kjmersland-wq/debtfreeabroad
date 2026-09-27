@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { getDict } from "@/i18n";
 import { SiteShell } from "@/components/SiteShell";
-import { HomePage } from "@/components/pages";
+import { MethodPage } from "@/components/pages";
 
-const title = "DebtFreeAbroad — Moving does not erase debt. Cheaper rent can.";
+const title = "Method — how DebtFreeAbroad estimates";
 const description =
-  "Estimate how much faster you reach zero debt if you move to a cheaper country. Plain arithmetic, private in your browser.";
+  "The amortization loop, the 2026 cost baseline, and everything the model leaves out.";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/method")({
   head: () => ({
     meta: [
       { title },
@@ -16,14 +16,14 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: description },
     ],
   }),
-  component: Index,
+  component: Method,
 });
 
-function Index() {
+function Method() {
   const t = getDict("en");
   return (
-    <SiteShell locale="en" t={t} path="/">
-      <HomePage t={t} locale="en" />
+    <SiteShell locale="en" t={t} path="/method">
+      <MethodPage t={t} />
     </SiteShell>
   );
 }

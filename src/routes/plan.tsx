@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { getDict } from "@/i18n";
 import { SiteShell } from "@/components/SiteShell";
-import { HomePage } from "@/components/pages";
+import { PlanPage } from "@/components/pages";
 
-const title = "DebtFreeAbroad — Moving does not erase debt. Cheaper rent can.";
+const title = "Debt payoff calculator — DebtFreeAbroad";
 const description =
-  "Estimate how much faster you reach zero debt if you move to a cheaper country. Plain arithmetic, private in your browser.";
+  "Type income, living costs and balances. See months to debt-free at home versus after a move.";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/plan")({
   head: () => ({
     meta: [
       { title },
@@ -16,14 +16,14 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: description },
     ],
   }),
-  component: Index,
+  component: Plan,
 });
 
-function Index() {
+function Plan() {
   const t = getDict("en");
   return (
-    <SiteShell locale="en" t={t} path="/">
-      <HomePage t={t} locale="en" />
+    <SiteShell locale="en" t={t} path="/plan">
+      <PlanPage t={t} locale="en" />
     </SiteShell>
   );
 }
