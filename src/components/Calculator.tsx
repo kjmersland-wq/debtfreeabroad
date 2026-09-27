@@ -306,7 +306,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
 
         <DebtRows t={t} debts={s.debts} currency={s.currency} onChange={(d) => set("debts", d)} />
 
-        <h2 className="mt-8 field-label">
+        <h2 className="mt-8 field-label font-sans">
           {t.form.to}
         </h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
@@ -363,7 +363,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
           </label>
         </div>
 
-        <h2 className="mt-8 field-label">
+        <h2 className="mt-8 field-label font-sans">
           {t.form.assumptions}
         </h2>
         <div className="mt-3">

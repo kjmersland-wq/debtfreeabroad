@@ -42,11 +42,11 @@ export function DebtRows({
       <div>
         <div>
           <div className="grid grid-cols-[1.6fr_1fr_0.7fr_0.9fr_0.9fr_1.75rem] gap-0.5 px-2 pb-1 text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
-            <span className="truncate px-1">{t.form.debtName}</span>
-            <span className="truncate px-1 text-right">{t.form.balance}</span>
-            <span className="truncate px-1 text-right">{t.form.apr}</span>
-            <span className="truncate px-1 text-right">{t.form.minimum}</span>
-            <span className="truncate px-1 text-right">{t.form.extra}</span>
+            <span className="truncate px-1" title={t.form.debtName}>{t.form.debtName}</span>
+            <span className="truncate px-1 text-right" title={t.form.balance}>{t.form.balance}</span>
+            <span className="truncate px-1 text-right" title={t.form.apr}>{t.form.apr}</span>
+            <span className="truncate px-1 text-right" title={t.form.minimum}>{t.form.minimum}</span>
+            <span className="truncate px-1 text-right" title={t.form.extra}>{t.form.extra}</span>
             <span />
           </div>
           <div className="space-y-2">
