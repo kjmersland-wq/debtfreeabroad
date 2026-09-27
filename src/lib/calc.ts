@@ -77,12 +77,12 @@ export type PayoffResult = {
  * the highest-APR debt with a balance, until the budget is used up.
  */
 export function simulatePayoff(debts: Debt[], monthlyBudget: number): PayoffResult {
-  let balances = debts.map((d) => Math.max(0, d.balance));
-  const rates = debts.map((d) => Math.max(0, d.apr) / 100 / 12);
-  const mins = debts.map((d) => Math.max(0, d.minimum));
-  const order = debts
-    .map((_, i) => i)
-    .sort((a, b) => rates[b] - rates[a]);
+  const rows = debts.map((d) => ({
+    balance: Math.max(0, d.balance),
+    rate: Math.max(0, d.apr) / 100 / 12,
+    min: Math.max(0, d.minimum),
+  }));
+  const order = [...rows].sort((a, b) => b.rate - a.rate);
 
   const balanceByMonth: number[] = [];
   let totalInterest = 0;
@@ -90,25 +90,25 @@ export function simulatePayoff(debts: Debt[], monthlyBudget: number): PayoffResu
 
   for (let month = 1; month <= MAX; month++) {
     // 1. interest
-    for (let i = 0; i < balances.length; i++) {
-      if (balances[i] <= 0) continue;
-      const interest = balances[i] * rates[i];
+    for (const row of rows) {
+      if (row.balance <= 0) continue;
+      const interest = row.balance * row.rate;
       totalInterest += interest;
-      balances[i] += interest;
+      row.balance += interest;
     }
     // 2. payments
     let budget = Math.max(0, monthlyBudget);
-    for (let i = 0; i < balances.length; i++) {
-      if (balances[i] <= 0) continue;
-      const pay = Math.min(mins[i], balances[i], budget);
-      balances[i] -= pay;
+    for (const row of rows) {
+      if (row.balance <= 0) continue;
+      const pay = Math.min(row.min, row.balance, budget);
+      row.balance -= pay;
       budget -= pay;
     }
-    for (const i of order) {
+    for (const row of order) {
       if (budget <= 0) break;
-      if (balances[i] <= 0) continue;
-      const pay = Math.min(balances[i], budget);
-      balances[i] -= pay;
+      if (row.balance <= 0) continue;
+      const pay = Math.min(row.balance, budget);
+      row.balance -= pay;
       budget -= pay;
     }
 
