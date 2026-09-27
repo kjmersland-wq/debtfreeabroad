@@ -18,8 +18,15 @@ function SectionHead({ index, title }: { index: string; title: string }) {
 export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
   return (
     <>
-      <section className="grid gap-10 pt-14 pb-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:pt-20 lg:pb-14">
-        <div>
+      <section className="relative grid gap-10 overflow-visible pt-14 pb-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:pt-20 lg:pb-14">
+        {/* Oversized ghost zero — the number everyone is working toward. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -top-16 right-0 hidden select-none font-display text-[26rem] leading-none font-semibold tracking-[-0.06em] text-copper/[0.06] lg:block"
+        >
+          0
+        </span>
+        <div className="relative">
           <p className="field-label">KM Tech Labs</p>
           <h1 className="mt-6 font-display text-[52px] leading-[0.98] tracking-[-0.055em] text-foreground sm:text-[64px] lg:text-[76px]">
             {t.hero.headline}
