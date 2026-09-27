@@ -15,7 +15,7 @@ export function LocaleSwitch({ current, path }: { current: Locale; path: AppPath
             className={
               l === current
                 ? "text-foreground underline underline-offset-4"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-muted-foreground transition-colors duration-[180ms] hover:text-copper-deep"
             }
           >
             {labels[l]}

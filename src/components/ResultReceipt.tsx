@@ -34,7 +34,7 @@ function Row({
   strong?: boolean;
 }) {
   return (
-    <div className="flex items-baseline justify-between gap-6 py-2.5 rule-top first:border-t-0">
+    <div className="flex items-baseline justify-between gap-6 py-2.5 rule-top first:border-t-0 transition-colors duration-200 hover:bg-copper-soft/50">
       <span className="text-sm text-ink-soft">{label}</span>
       <span className={`num ${strong ? "text-lg text-foreground" : "text-base text-foreground"}`}>
         {value}
@@ -79,7 +79,7 @@ function Timeline({
               <div className="mt-1.5 space-y-1.5">
                 {[
                   { label: t.result.home, v: h, cls: "bg-muted-foreground" },
-                  { label: t.result.away, v: a, cls: "bg-foreground" },
+                  { label: t.result.away, v: a, cls: "bg-copper" },
                 ].map((bar) => (
                   <div key={bar.label} className="flex items-center gap-3">
                     <span className="w-16 shrink-0 text-xs text-muted-foreground">
@@ -146,7 +146,7 @@ export function ResultReceipt({
       ) : (
         <>
           <div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-3">
-            <span className="num font-display text-[120px] leading-[0.85] font-semibold tracking-[-0.06em] text-foreground sm:text-[160px]">
+            <span className="num font-display text-[120px] leading-[0.85] font-semibold tracking-[-0.06em] text-copper-deep sm:text-[160px]">
               {result.monthsSaved > 0 ? saved : "0"}
             </span>
             <span className="text-sm text-ink-soft">
@@ -238,7 +238,7 @@ export function ResultReceipt({
         </>
       )}
 
-      <p className="mt-8 rule-top pt-5 font-display text-lg leading-snug text-foreground">
+      <p className="mt-8 rule-top pt-5 font-display text-lg leading-snug text-copper-deep">
         {t.result.honest}
       </p>
       <p className="mt-3 text-sm text-muted-foreground">

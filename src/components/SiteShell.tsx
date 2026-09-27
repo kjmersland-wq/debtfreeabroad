@@ -12,10 +12,10 @@ function Nav({ locale, t, path }: { locale: Locale; t: Dict; path: AppPath }) {
         </AppLink>
         <div className="flex items-center gap-6">
           <nav className="hidden items-center gap-6 text-sm text-ink-soft sm:flex">
-            <AppLink to="/method" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
+            <AppLink to="/method" locale={locale} className="transition-colors duration-[180ms] hover:text-copper-deep">
               {t.nav.method}
             </AppLink>
-            <AppLink to="/pricing" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
+            <AppLink to="/pricing" locale={locale} className="transition-colors duration-[180ms] hover:text-copper-deep">
               {t.nav.pricing}
             </AppLink>
           </nav>
@@ -39,16 +39,16 @@ function Footer({ locale, t }: { locale: Locale; t: Dict }) {
             <span className="ml-3 text-muted-foreground">{t.footer.brand}</span>
           </p>
           <div className="flex flex-wrap items-center gap-5">
-            <AppLink to="/method" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
+            <AppLink to="/method" locale={locale} className="transition-colors duration-[180ms] hover:text-copper-deep">
               {t.nav.method}
             </AppLink>
-            <AppLink to="/pricing" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
+            <AppLink to="/pricing" locale={locale} className="transition-colors duration-[180ms] hover:text-copper-deep">
               {t.nav.pricing}
             </AppLink>
-            <AppLink to="/privacy" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
+            <AppLink to="/privacy" locale={locale} className="transition-colors duration-[180ms] hover:text-copper-deep">
               {t.footer.privacy}
             </AppLink>
-            <AppLink to="/terms" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
+            <AppLink to="/terms" locale={locale} className="transition-colors duration-[180ms] hover:text-copper-deep">
               {t.footer.terms}
             </AppLink>
             <LocaleSwitch current={locale} path="/" />

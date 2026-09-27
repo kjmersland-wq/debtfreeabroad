@@ -130,10 +130,10 @@ function Segmented<T extends string>({
             type="button"
             aria-pressed={value === o.value}
             onClick={() => onChange(o.value)}
-            className={`h-9 rounded-full border px-4 text-sm transition-opacity duration-[180ms] ${
+            className={`h-9 rounded-full border px-4 text-sm transition-all duration-[180ms] ${
               value === o.value
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-border-strong text-foreground hover:opacity-70"
+                ? "border-copper-deep bg-copper-deep text-primary-foreground"
+                : "border-border-strong text-foreground hover:border-copper hover:text-copper-deep"
             }`}
           >
             {o.label}
@@ -351,7 +351,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
           <input
             id="keep-income"
             type="checkbox"
-            className="mt-1 size-4 accent-[var(--primary)]"
+            className="mt-1 size-4 accent-[var(--copper)]"
             checked={s.keepIncome}
             onChange={(e) => set("keepIncome", e.target.checked)}
           />

@@ -7,7 +7,7 @@ import { baselines, destinationCountries, originCountries } from "@/data/costBas
 function SectionHead({ index, title }: { index: string; title: string }) {
   return (
     <div className="lg:sticky lg:top-24 lg:self-start">
-      <span className="num text-[11px] tracking-[0.12em] text-muted-foreground">{index}</span>
+      <span className="num text-[11px] tracking-[0.12em] text-copper">{index}</span>
       <h2 className="mt-4 max-w-sm font-display text-4xl leading-[1.05] tracking-[-0.045em] sm:text-5xl">
         {title}
       </h2>
@@ -46,8 +46,11 @@ export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
         <SectionHead index="01" title={t.notWhat.title} />
         <ol className="divide-y divide-border border-y border-border">
           {[t.notWhat.a, t.notWhat.b, t.notWhat.c].map((line, i) => (
-            <li key={i} className="grid grid-cols-[3rem_1fr] gap-4 py-7">
-              <span className="num font-display text-2xl tracking-[-0.04em] text-muted-foreground">
+            <li
+              key={i}
+              className="group grid grid-cols-[3rem_1fr] gap-4 py-7 transition-colors duration-200 hover:bg-copper-soft/40"
+            >
+              <span className="num font-display text-2xl tracking-[-0.04em] text-muted-foreground transition-colors duration-200 group-hover:text-copper">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <p className="text-[17px] leading-relaxed text-ink-soft">{line}</p>
@@ -58,7 +61,7 @@ export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
 
       <section className="grid gap-12 rule-top py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
         <SectionHead index="02" title={t.method.title} />
-        <div className="rounded-[1.75rem] border border-border bg-surface-raised p-8 sm:p-12">
+        <div className="rounded-[1.75rem] border border-border bg-surface-raised p-8 transition-colors duration-200 hover:border-copper/50 sm:p-12">
           <p className="font-display text-2xl leading-snug tracking-[-0.03em] text-foreground sm:text-3xl">
             {t.method.lead}
           </p>
@@ -77,8 +80,8 @@ export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
 
 export function PricingBlock({ t, index }: { t: Dict; index?: string }) {
   const Item = ({ children }: { children: string }) => (
-    <li className="flex items-baseline gap-3 border-t border-border py-3">
-      <span className="size-1.5 shrink-0 translate-y-[-2px] rounded-full bg-foreground" />
+    <li className="flex items-baseline gap-3 border-t border-border py-3 transition-colors duration-200 hover:text-foreground">
+      <span className="size-1.5 shrink-0 translate-y-[-2px] rounded-full bg-copper" />
       {children}
     </li>
   );
@@ -90,7 +93,7 @@ export function PricingBlock({ t, index }: { t: Dict; index?: string }) {
         <h2 className="font-display text-4xl tracking-[-0.045em] sm:text-5xl">{t.pricing.title}</h2>
       )}
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="flex flex-col rounded-[1.75rem] border border-border p-8">
+        <div className="flex flex-col rounded-[1.75rem] border border-border p-8 transition-all duration-200 hover:-translate-y-1 hover:border-copper/50">
           <h3 className="field-label font-sans">{t.pricing.free}</h3>
           <p className="num mt-4 font-display text-6xl tracking-[-0.05em]">{t.pricing.freePrice}</p>
           <ul className="mt-8 text-sm text-ink-soft">
@@ -99,8 +102,8 @@ export function PricingBlock({ t, index }: { t: Dict; index?: string }) {
             <Item>Shareable link, browser-only storage</Item>
           </ul>
         </div>
-        <div className="flex flex-col rounded-[1.75rem] border border-foreground bg-surface-raised p-8">
-          <h3 className="field-label font-sans">{t.pricing.pro}</h3>
+        <div className="flex flex-col rounded-[1.75rem] border border-copper-deep bg-surface-raised p-8 transition-all duration-200 hover:-translate-y-1">
+          <h3 className="field-label font-sans text-copper-deep">{t.pricing.pro}</h3>
           <p className="mt-4 font-display text-6xl tracking-[-0.05em]">{t.pricing.proPrice}</p>
           <ul className="mt-8 text-sm text-ink-soft">
             <Item>Unlimited debt rows</Item>
