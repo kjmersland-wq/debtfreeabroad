@@ -79,7 +79,7 @@ function Timeline({
               <div className="mt-1.5 space-y-1.5">
                 {[
                   { label: t.result.home, v: h, cls: "bg-muted-foreground" },
-                  { label: t.result.away, v: a, cls: "bg-forest" },
+                  { label: t.result.away, v: a, cls: "bg-foreground" },
                 ].map((bar) => (
                   <div key={bar.label} className="flex items-center gap-3">
                     <span className="w-16 shrink-0 text-xs text-muted-foreground">

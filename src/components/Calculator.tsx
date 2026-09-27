@@ -351,7 +351,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
           <input
             id="keep-income"
             type="checkbox"
-            className="mt-1 size-4 accent-[var(--forest)]"
+            className="mt-1 size-4 accent-[var(--primary)]"
             checked={s.keepIncome}
             onChange={(e) => set("keepIncome", e.target.checked)}
           />
