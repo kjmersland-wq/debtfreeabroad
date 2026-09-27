@@ -74,15 +74,6 @@ export function SiteShell({
 }) {
   return (
     <div className="min-h-screen bg-background">
-      {/* Ledger hairlines framing the content column, like a ruled page. */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 z-0 hidden md:block">
-        <div className="mx-auto grid h-full w-full max-w-(--container-content) grid-cols-4 px-5">
-          <div className="border-l border-foreground/[0.05]" />
-          <div className="border-l border-foreground/[0.05]" />
-          <div className="border-l border-foreground/[0.05]" />
-          <div className="border-x border-foreground/[0.05]" />
-        </div>
-      </div>
       <div className="relative z-10">
         <Nav locale={locale} t={t} path={path} />
         <main className="mx-auto w-full max-w-(--container-content) px-5">{children}</main>

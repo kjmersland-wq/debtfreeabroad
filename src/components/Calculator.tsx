@@ -8,7 +8,7 @@ import {
   type CountryCode,
   type DisplayCurrency,
 } from "@/data/costBaselines";
-import { calculate, type CityTier, type Debt, type Household, type HousingMode } from "@/lib/calc";
+import { calculate, type CalcResult, type CityTier, type Debt, type Household, type HousingMode } from "@/lib/calc";
 import { CountrySelect } from "./CountrySelect";
 import { DebtRows } from "./DebtRows";
 import { ResultReceipt } from "./ResultReceipt";
@@ -144,7 +144,14 @@ function Segmented<T extends string>({
   );
 }
 
-export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
+export type PlanState = {
+  s: State;
+  set: <K extends keyof State>(key: K, value: State[K]) => void;
+  result: CalcResult;
+  hasDebts: boolean;
+};
+
+export function usePlanState(): PlanState {
   const [s, setS] = useState<State>(defaultState);
   const set = <K extends keyof State>(key: K, value: State[K]) =>
     setS((prev) => ({ ...prev, [key]: value }));
@@ -198,6 +205,12 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
   );
 
   const hasDebts = s.debts.some((d) => d.balance > 0);
+
+  return { s, set, result, hasDebts };
+}
+
+export function Calculator({ t, locale, plan }: { t: Dict; locale: Locale; plan: PlanState }) {
+  const { s, set, result, hasDebts } = plan;
 
   return (
     <div id="calculator" className="grid gap-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">

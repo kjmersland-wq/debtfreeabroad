@@ -1,28 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 import type { Dict, Locale } from "@/i18n";
 import type { CalcResult } from "@/lib/calc";
 import { baselines, type CountryCode, type DisplayCurrency } from "@/data/costBaselines";
 import { AppLink, formatMoney, formatNumber } from "@/lib/locale";
-
-function useCountUp(value: number, numberLocale: string) {
-  const [shown, setShown] = useState(value);
-  const from = useRef(value);
-  useEffect(() => {
-    const start = performance.now();
-    const a = from.current;
-    const b = value;
-    let raf = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / 400);
-      setShown(a + (b - a) * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) raf = requestAnimationFrame(tick);
-      else from.current = b;
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [value]);
-  return formatNumber(Math.round(shown), numberLocale);
-}
 
 function Row({
   label,
