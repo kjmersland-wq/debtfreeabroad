@@ -205,7 +205,7 @@ export function Calculator({ t, locale }: { t: Dict; locale: Locale }) {
         className="order-2 lg:sticky lg:top-20 lg:self-start lg:border-l lg:border-border lg:pl-10"
         onSubmit={(e) => e.preventDefault()}
       >
-        <h2 className="field-label">
+        <h2 className="field-label font-sans tracking-[0.12em]">
           {t.form.from}
         </h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">

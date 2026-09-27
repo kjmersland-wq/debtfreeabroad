@@ -39,25 +39,25 @@ export function DebtRows({
       <legend className="field-label">
         {t.form.debts} ({currency})
       </legend>
-      <div className="overflow-x-auto">
-        <div className="min-w-[30rem]">
-          <div className="grid grid-cols-[1.6fr_1fr_0.7fr_0.9fr_0.9fr_2rem] gap-1 px-3 pb-1 text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
-            <span className="px-2">{t.form.debtName}</span>
-            <span className="px-2 text-right">{t.form.balance}</span>
-            <span className="px-2 text-right">{t.form.apr}</span>
-            <span className="px-2 text-right">{t.form.minimum}</span>
-            <span className="px-2 text-right">{t.form.extra}</span>
+      <div>
+        <div>
+          <div className="grid grid-cols-[1.6fr_1fr_0.7fr_0.9fr_0.9fr_1.75rem] gap-0.5 px-2 pb-1 text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
+            <span className="truncate px-1">{t.form.debtName}</span>
+            <span className="truncate px-1 text-right">{t.form.balance}</span>
+            <span className="truncate px-1 text-right">{t.form.apr}</span>
+            <span className="truncate px-1 text-right">{t.form.minimum}</span>
+            <span className="truncate px-1 text-right">{t.form.extra}</span>
             <span />
           </div>
           <div className="space-y-2">
             {debts.map((d, i) => (
               <div
                 key={d.id}
-                className="grid grid-cols-[1.6fr_1fr_0.7fr_0.9fr_0.9fr_2rem] items-center gap-1 rounded-full border border-border bg-surface-raised px-3"
+                className="grid grid-cols-[1.6fr_1fr_0.7fr_0.9fr_0.9fr_1.75rem] items-center gap-0.5 rounded-full border border-border bg-surface-raised px-2"
               >
               <input
                 aria-label={`${t.form.debtName} ${i + 1}`}
-                className="h-10 w-full min-w-0 bg-transparent px-2 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring"
+                className="h-10 w-full min-w-0 bg-transparent px-1 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring"
                 value={d.name}
                 onChange={(e) => update(d.id, { name: e.target.value })}
               />
@@ -66,7 +66,7 @@ export function DebtRows({
                 type="number"
                 inputMode="decimal"
                 min={0}
-                className="h-10 w-full min-w-0 bg-transparent px-2 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
+                className="h-10 w-full min-w-0 bg-transparent px-1 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
                 value={num(d.balance)}
                 onChange={(e) => update(d.id, { balance: Number(e.target.value) || 0 })}
               />
@@ -75,7 +75,7 @@ export function DebtRows({
                 type="number"
                 inputMode="decimal"
                 min={0} step="0.1"
-                className="h-10 w-full min-w-0 bg-transparent px-2 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
+                className="h-10 w-full min-w-0 bg-transparent px-1 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
                 value={num(d.apr)}
                 onChange={(e) => update(d.id, { apr: Number(e.target.value) || 0 })}
               />
@@ -84,7 +84,7 @@ export function DebtRows({
                 type="number"
                 inputMode="decimal"
                 min={0}
-                className="h-10 w-full min-w-0 bg-transparent px-2 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
+                className="h-10 w-full min-w-0 bg-transparent px-1 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
                 value={num(d.minimum)}
                 onChange={(e) => update(d.id, { minimum: Number(e.target.value) || 0 })}
               />
@@ -93,7 +93,7 @@ export function DebtRows({
                 type="number"
                 inputMode="decimal"
                 min={0}
-                className="h-10 w-full min-w-0 bg-transparent px-2 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
+                className="h-10 w-full min-w-0 bg-transparent px-1 text-sm num outline-none focus-visible:rounded-full focus-visible:ring-1 focus-visible:ring-ring text-right"
                 value={num(d.extra)}
                 onChange={(e) => update(d.id, { extra: Number(e.target.value) || 0 })}
               />

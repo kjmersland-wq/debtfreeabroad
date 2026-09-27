@@ -64,7 +64,7 @@ function Timeline({
 
   return (
     <div className="mt-8">
-      <h3 className="field-label">{t.result.timeline}</h3>
+      <h3 className="field-label font-sans">{t.result.timeline}</h3>
       <div className="mt-4 space-y-4">
         {[1, 2, 3, 4, 5].map((year) => {
           const h = at(result.home.payoff.balanceByMonth, year);
@@ -197,7 +197,7 @@ export function ResultReceipt({
           <Timeline t={t} result={result} currency={currency} numberLocale={numberLocale} />
 
           <div className="mt-8 rule-top pt-4">
-            <h3 className="field-label">
+            <h3 className="field-label font-sans">
               {t.result.inputsUsed}
             </h3>
             <dl className="mt-3 grid gap-2 text-sm text-ink-soft sm:grid-cols-2">
