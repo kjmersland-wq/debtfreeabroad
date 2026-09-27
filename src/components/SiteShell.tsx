@@ -5,24 +5,24 @@ import { LocaleSwitch } from "./LocaleSwitch";
 
 function Nav({ locale, t, path }: { locale: Locale; t: Dict; path: AppPath }) {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
-      <div className="mx-auto flex h-14 w-full max-w-(--container-content) items-center justify-between px-5">
-        <AppLink to="/" locale={locale} className="font-display text-base tracking-tight">
+    <header className="sticky top-0 z-30 border-b border-border bg-background">
+      <div className="mx-auto flex h-16 w-full max-w-(--container-content) items-center justify-between px-5">
+        <AppLink to="/" locale={locale} className="font-display text-lg font-semibold tracking-[-0.04em]">
           DebtFree<span className="text-muted-foreground">Abroad</span>
         </AppLink>
         <div className="flex items-center gap-6">
           <nav className="hidden items-center gap-6 text-sm text-ink-soft sm:flex">
-            <AppLink to="/plan" locale={locale} className="hover:text-foreground">
-              {t.nav.plan}
-            </AppLink>
-            <AppLink to="/method" locale={locale} className="hover:text-foreground">
+            <AppLink to="/method" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
               {t.nav.method}
             </AppLink>
-            <AppLink to="/pricing" locale={locale} className="hover:text-foreground">
+            <AppLink to="/pricing" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
               {t.nav.pricing}
             </AppLink>
           </nav>
           <LocaleSwitch current={locale} path={path} />
+          <AppLink to="/plan" locale={locale} className="pill-primary h-9 px-4">
+            {t.nav.plan}
+          </AppLink>
         </div>
       </div>
     </header>
@@ -35,19 +35,20 @@ function Footer({ locale, t }: { locale: Locale; t: Dict }) {
       <div className="mx-auto w-full max-w-(--container-content) px-5 py-10 text-sm text-muted-foreground">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <p className="text-foreground">
-            DebtFreeAbroad — {t.footer.brand}
+            <span className="font-display text-2xl font-semibold tracking-[-0.04em]">DebtFreeAbroad</span>
+            <span className="ml-3 text-muted-foreground">{t.footer.brand}</span>
           </p>
           <div className="flex flex-wrap items-center gap-5">
-            <AppLink to="/method" locale={locale} className="hover:text-foreground">
+            <AppLink to="/method" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
               {t.nav.method}
             </AppLink>
-            <AppLink to="/pricing" locale={locale} className="hover:text-foreground">
+            <AppLink to="/pricing" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
               {t.nav.pricing}
             </AppLink>
-            <AppLink to="/privacy" locale={locale} className="hover:text-foreground">
+            <AppLink to="/privacy" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
               {t.footer.privacy}
             </AppLink>
-            <AppLink to="/terms" locale={locale} className="hover:text-foreground">
+            <AppLink to="/terms" locale={locale} className="transition-opacity duration-[180ms] hover:opacity-60">
               {t.footer.terms}
             </AppLink>
             <LocaleSwitch current={locale} path="/" />

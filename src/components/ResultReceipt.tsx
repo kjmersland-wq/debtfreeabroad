@@ -85,7 +85,7 @@ function Timeline({
                     <span className="w-16 shrink-0 text-xs text-muted-foreground">
                       {bar.label}
                     </span>
-                    <div className="h-2.5 flex-1 rounded-full bg-surface">
+                    <div className="h-1.5 flex-1 rounded-full bg-surface">
                       <div
                         className={`h-full rounded-full ${bar.cls} transition-[width] duration-200`}
                         style={{ width: `${Math.min(100, (bar.v / start) * 100)}%` }}
@@ -161,7 +161,7 @@ export function ResultReceipt({
           </div>
           <p className="mt-3 max-w-md text-sm text-ink-soft">{advice}</p>
 
-          <div className="mt-8">
+          <div className="mt-10 rounded-[1.5rem] border border-border bg-surface-raised px-6 py-2">
             <Row
               label={t.result.atHome}
               value={months(result.home.payoff.months, result.home.payoff.neverPaidOff)}

@@ -4,78 +4,116 @@ import { Calculator } from "./Calculator";
 import { WaitlistForm } from "./WaitlistForm";
 import { baselines, destinationCountries, originCountries } from "@/data/costBaselines";
 
+function SectionHead({ index, title }: { index: string; title: string }) {
+  return (
+    <div className="lg:sticky lg:top-24 lg:self-start">
+      <span className="num text-[11px] tracking-[0.12em] text-muted-foreground">{index}</span>
+      <h2 className="mt-4 max-w-sm font-display text-4xl leading-[1.05] tracking-[-0.045em] sm:text-5xl">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
 export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
   return (
     <>
-      <section className="pt-24 pb-16">
-        <p className="field-label">
-          KM Tech Labs
-        </p>
-        <h1 className="mt-5 max-w-3xl font-display text-[56px] leading-[1.0] tracking-[-0.05em] text-foreground lg:text-[72px]">
-          {t.hero.headline}
-        </h1>
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">{t.hero.sub}</p>
-      </section>
-
-      <Calculator t={t} locale={locale} />
-
-      <section className="mt-24 py-24 rule-top">
-        <h2 className="font-display text-3xl">{t.notWhat.title}</h2>
-        <div className="mt-6 grid gap-6 sm:grid-cols-3">
-          {[t.notWhat.a, t.notWhat.b, t.notWhat.c].map((line, i) => (
-            <p key={i} className="rule-top pt-4 text-sm leading-relaxed text-ink-soft">
-              {line}
-            </p>
-          ))}
+      <section className="grid gap-10 pt-20 pb-16 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:pt-28 lg:pb-20">
+        <div>
+          <p className="field-label">KM Tech Labs</p>
+          <h1 className="mt-6 font-display text-[52px] leading-[0.98] tracking-[-0.055em] text-foreground sm:text-[64px] lg:text-[76px]">
+            {t.hero.headline}
+          </h1>
+        </div>
+        <div className="lg:border-l lg:border-border lg:pb-2 lg:pl-10">
+          <p className="text-[17px] leading-relaxed text-ink-soft">{t.hero.sub}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="#calculator" className="pill-primary">
+              {t.result.title}
+            </a>
+            <AppLink to="/method" locale={locale} className="pill-secondary h-11 px-5 text-sm">
+              {t.result.methodLink}
+            </AppLink>
+          </div>
         </div>
       </section>
 
-      <section className="mt-24 py-24 rule-top paper-card p-8">
-        <h2 className="font-display text-3xl">{t.method.title}</h2>
-        <p className="mt-3 max-w-xl text-ink-soft">{t.method.lead}</p>
-        <AppLink
-          to="/method"
-          locale={locale}
-          className="mt-5 inline-block text-sm text-foreground underline underline-offset-4"
-        >
-          {t.result.methodLink}
-        </AppLink>
+      <div className="rule-top pt-16">
+        <Calculator t={t} locale={locale} />
+      </div>
+
+      <section className="mt-28 grid gap-12 rule-top py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
+        <SectionHead index="01" title={t.notWhat.title} />
+        <ol className="divide-y divide-border border-y border-border">
+          {[t.notWhat.a, t.notWhat.b, t.notWhat.c].map((line, i) => (
+            <li key={i} className="grid grid-cols-[3rem_1fr] gap-4 py-7">
+              <span className="num font-display text-2xl tracking-[-0.04em] text-muted-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <p className="text-[17px] leading-relaxed text-ink-soft">{line}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <section className="mt-24 py-24 rule-top">
-        <PricingBlock t={t} />
+      <section className="grid gap-12 rule-top py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
+        <SectionHead index="02" title={t.method.title} />
+        <div className="rounded-[1.75rem] border border-border bg-surface-raised p-8 sm:p-12">
+          <p className="font-display text-2xl leading-snug tracking-[-0.03em] text-foreground sm:text-3xl">
+            {t.method.lead}
+          </p>
+          <AppLink to="/method" locale={locale} className="pill-secondary mt-8 h-11 px-5 text-sm">
+            {t.result.methodLink}
+          </AppLink>
+        </div>
+      </section>
+
+      <section className="rule-top py-24">
+        <PricingBlock t={t} index="03" />
       </section>
     </>
   );
 }
 
-export function PricingBlock({ t }: { t: Dict }) {
+export function PricingBlock({ t, index }: { t: Dict; index?: string }) {
+  const Item = ({ children }: { children: string }) => (
+    <li className="flex items-baseline gap-3 border-t border-border py-3">
+      <span className="size-1.5 shrink-0 translate-y-[-2px] rounded-full bg-foreground" />
+      {children}
+    </li>
+  );
   return (
-    <>
-      <h2 className="font-display text-3xl">{t.pricing.title}</h2>
-      <div className="mt-6 grid gap-6 md:grid-cols-2">
-        <div className="paper-card p-6">
-          <h3 className="text-xl">{t.pricing.free}</h3>
-          <p className="num mt-2 font-display text-4xl">{t.pricing.freePrice}</p>
-          <ul className="mt-5 space-y-2 text-sm text-ink-soft">
-            <li className="rule-top pt-2">1 destination</li>
-            <li className="rule-top pt-2">3 debt rows</li>
-            <li className="rule-top pt-2">Shareable link, browser-only storage</li>
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
+      {index ? (
+        <SectionHead index={index} title={t.pricing.title} />
+      ) : (
+        <h2 className="font-display text-4xl tracking-[-0.045em] sm:text-5xl">{t.pricing.title}</h2>
+      )}
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="flex flex-col rounded-[1.75rem] border border-border p-8">
+          <h3 className="field-label font-sans">{t.pricing.free}</h3>
+          <p className="num mt-4 font-display text-6xl tracking-[-0.05em]">{t.pricing.freePrice}</p>
+          <ul className="mt-8 text-sm text-ink-soft">
+            <Item>1 destination</Item>
+            <Item>3 debt rows</Item>
+            <Item>Shareable link, browser-only storage</Item>
           </ul>
         </div>
-        <div className="paper-card p-6">
-          <h3 className="text-xl">{t.pricing.pro}</h3>
-          <p className="mt-2 font-display text-4xl">{t.pricing.proPrice}</p>
-          <ul className="mt-5 space-y-2 text-sm text-ink-soft">
-            <li className="rule-top pt-2">Unlimited debt rows</li>
-            <li className="rule-top pt-2">Compare 3 destinations</li>
-            <li className="rule-top pt-2">Saved scenarios, PDF plan</li>
-            <li className="rule-top pt-2">Inflation and income-change sliders</li>
+        <div className="flex flex-col rounded-[1.75rem] border border-foreground bg-surface-raised p-8">
+          <h3 className="field-label font-sans">{t.pricing.pro}</h3>
+          <p className="mt-4 font-display text-6xl tracking-[-0.05em]">{t.pricing.proPrice}</p>
+          <ul className="mt-8 text-sm text-ink-soft">
+            <Item>Unlimited debt rows</Item>
+            <Item>Compare 3 destinations</Item>
+            <Item>Saved scenarios, PDF plan</Item>
+            <Item>Inflation and income-change sliders</Item>
           </ul>
-          <WaitlistForm t={t} />
+          <div className="mt-auto pt-4">
+            <WaitlistForm t={t} />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
