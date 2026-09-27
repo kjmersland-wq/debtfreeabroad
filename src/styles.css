@@ -60,6 +60,9 @@
   --font-sans: "Geist", system-ui, sans-serif;
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
+  --color-copper: var(--copper);
+  --color-copper-soft: var(--copper-soft);
+  --color-copper-deep: var(--copper-deep);
   --container-content: 72rem;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
@@ -94,6 +97,10 @@
   --border-strong: rgb(28 28 28 / 0.4);
   --input: #eceae4;
   --ring: #1c1c1c;
+  /* Warm copper accent — the one chromatic note on the parchment canvas. */
+  --copper: #a4542e;
+  --copper-deep: #8a4222;
+  --copper-soft: #f3e4d8;
   --chart-1: #1c1c1c;
   --chart-2: rgb(28 28 28 / 0.4);
   --chart-3: rgb(28 28 28 / 0.83);
