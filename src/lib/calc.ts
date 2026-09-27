@@ -112,7 +112,7 @@ export function simulatePayoff(debts: Debt[], monthlyBudget: number): PayoffResu
       budget -= pay;
     }
 
-    const total = balances.reduce((s, b) => s + Math.max(0, b), 0);
+    const total = rows.reduce((s, r) => s + Math.max(0, r.balance), 0);
     balanceByMonth.push(total);
     if (total <= 0.01) {
       return { months: month, totalInterest, balanceByMonth, neverPaidOff: false };

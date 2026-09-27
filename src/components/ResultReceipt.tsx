@@ -54,19 +54,13 @@ function Timeline({
   currency: DisplayCurrency;
   numberLocale: string;
 }) {
-  const start =
-    result.home.payoff.balanceByMonth.length > 0
-      ? Math.max(
-          result.home.payoff.balanceByMonth[0],
-          result.abroad.payoff.balanceByMonth[0],
-        )
-      : 0;
+  const start = Math.max(
+    result.home.payoff.balanceByMonth[0] ?? 0,
+    result.abroad.payoff.balanceByMonth[0] ?? 0,
+  );
   if (start <= 0) return null;
 
-  const at = (arr: number[], year: number) => {
-    const idx = year * 12 - 1;
-    return idx < arr.length ? Math.max(0, arr[idx]) : 0;
-  };
+  const at = (arr: number[], year: number) => Math.max(0, arr[year * 12 - 1] ?? 0);
 
   return (
     <div className="mt-8">
