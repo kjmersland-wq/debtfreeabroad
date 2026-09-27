@@ -1,6 +1,7 @@
 import type { Dict, Locale } from "@/i18n";
 import { AppLink } from "@/lib/locale";
-import { Calculator } from "./Calculator";
+import { Calculator, usePlanState, type PlanState } from "./Calculator";
+import { useCountUp } from "@/lib/useCountUp";
 import { WaitlistForm } from "./WaitlistForm";
 import { baselines, destinationCountries, originCountries } from "@/data/costBaselines";
 
@@ -15,38 +16,45 @@ function SectionHead({ index, title }: { index: string; title: string }) {
   );
 }
 
+function HeroMonths({ t, plan }: { t: Dict; plan: PlanState }) {
+  const saved = useCountUp(Math.max(0, plan.result.monthsSaved), t.numberLocale);
+  return (
+    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-3">
+      <span className="num font-display text-[120px] leading-[0.85] font-semibold tracking-[-0.06em] text-foreground sm:text-[160px]">
+        {plan.hasDebts && plan.result.monthsSaved > 0 ? saved : "0"}
+      </span>
+      <span className="text-sm text-ink-soft">
+        {t.result.monthsSaved.toLowerCase()}
+      </span>
+      <span className="pill-secondary h-6 px-2.5 text-[11px] tracking-[0.12em] uppercase">
+        {t.hero.chipPrivate}
+      </span>
+      <span className="pill-secondary h-6 px-2.5 text-[11px] tracking-[0.12em] uppercase">
+        {t.hero.chipNoAi}
+      </span>
+    </div>
+  );
+}
+
 export function HomePage({ t, locale }: { t: Dict; locale: Locale }) {
+  const plan = usePlanState();
   return (
     <>
-      <section className="relative grid gap-10 overflow-visible pt-14 pb-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:pt-20 lg:pb-14">
-        {/* Oversized ghost zero — the number everyone is working toward. */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -top-16 right-0 hidden select-none font-display text-[26rem] leading-none font-semibold tracking-[-0.06em] text-copper/[0.06] lg:block"
-        >
-          0
-        </span>
-        <div className="relative">
+      <section className="grid gap-10 pt-14 pb-12 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end lg:pt-20 lg:pb-14">
+        <div>
           <p className="field-label">KM Tech Labs</p>
           <h1 className="mt-6 font-display text-[52px] leading-[0.98] tracking-[-0.055em] text-foreground sm:text-[64px] lg:text-[76px]">
             {t.hero.headline}
           </h1>
         </div>
         <div className="lg:border-l lg:border-border lg:pb-2 lg:pl-10">
-          <p className="text-[17px] leading-relaxed text-ink-soft">{t.hero.sub}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#calculator" className="pill-primary">
-              {t.result.title}
-            </a>
-            <AppLink to="/method" locale={locale} className="pill-secondary h-11 px-5 text-sm">
-              {t.result.methodLink}
-            </AppLink>
-          </div>
+          <HeroMonths t={t} plan={plan} />
+          <p className="mt-8 text-[17px] leading-relaxed text-ink-soft">{t.hero.sub}</p>
         </div>
       </section>
 
       <div className="rule-top pt-12">
-        <Calculator t={t} locale={locale} />
+        <Calculator t={t} locale={locale} plan={plan} />
       </div>
 
       <section className="mt-28 grid gap-12 rule-top py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
@@ -223,12 +231,13 @@ export function TermsPage({ t }: { t: Dict }) {
 }
 
 export function PlanPage({ t, locale }: { t: Dict; locale: Locale }) {
+  const plan = usePlanState();
   return (
     <div className="py-16">
       <h1 className="font-display text-4xl">{t.nav.plan}</h1>
       <p className="mt-4 max-w-xl text-ink-soft">{t.hero.sub}</p>
       <div className="mt-10">
-        <Calculator t={t} locale={locale} />
+        <Calculator t={t} locale={locale} plan={plan} />
       </div>
     </div>
   );

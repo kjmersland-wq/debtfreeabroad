@@ -1,28 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 import type { Dict, Locale } from "@/i18n";
 import type { CalcResult } from "@/lib/calc";
 import { baselines, type CountryCode, type DisplayCurrency } from "@/data/costBaselines";
 import { AppLink, formatMoney, formatNumber } from "@/lib/locale";
-
-function useCountUp(value: number, numberLocale: string) {
-  const [shown, setShown] = useState(value);
-  const from = useRef(value);
-  useEffect(() => {
-    const start = performance.now();
-    const a = from.current;
-    const b = value;
-    let raf = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / 400);
-      setShown(a + (b - a) * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) raf = requestAnimationFrame(tick);
-      else from.current = b;
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [value]);
-  return formatNumber(Math.round(shown), numberLocale);
-}
 
 function Row({
   label,
@@ -123,7 +102,6 @@ export function ResultReceipt({
   to: CountryCode;
 }) {
   const numberLocale = t.numberLocale;
-  const saved = useCountUp(Math.max(0, result.monthsSaved), numberLocale);
 
   const months = (n: number, never: boolean) =>
     never ? t.result.never : `${formatNumber(n, numberLocale)} ${t.result.months}`;
@@ -145,21 +123,7 @@ export function ResultReceipt({
         <p className="mt-6 text-base text-ink-soft">{t.result.noDebts}</p>
       ) : (
         <>
-          <div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-3">
-            <span className="num font-display text-[120px] leading-[0.85] font-semibold tracking-[-0.06em] text-copper-deep sm:text-[160px]">
-              {result.monthsSaved > 0 ? saved : "0"}
-            </span>
-            <span className="text-sm text-ink-soft">
-              {t.result.monthsSaved.toLowerCase()}
-            </span>
-            <span className="pill-secondary h-6 px-2.5 text-[11px] tracking-[0.12em] uppercase">
-              {t.hero.chipPrivate}
-            </span>
-            <span className="pill-secondary h-6 px-2.5 text-[11px] tracking-[0.12em] uppercase">
-              {t.hero.chipNoAi}
-            </span>
-          </div>
-          <p className="mt-3 max-w-md text-sm text-ink-soft">{advice}</p>
+          <p className="mt-4 max-w-md text-sm text-ink-soft">{advice}</p>
 
           <div className="mt-10 rounded-[1.5rem] border border-border bg-surface-raised px-6 py-2">
             <Row
