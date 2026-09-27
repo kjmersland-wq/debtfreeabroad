@@ -182,6 +182,14 @@
   background-color: var(--color-card);
   border: 1px solid var(--color-border);
   border-radius: 1.25rem;
+  transition:
+    border-color 220ms ease,
+    transform 220ms ease;
+
+  &:hover {
+    border-color: rgb(164 84 46 / 0.45);
+    transform: translateY(-2px);
+  }
 }
 
 @utility field-label {
@@ -204,10 +212,18 @@
   color: var(--color-foreground);
   font-variant-numeric: tabular-nums;
   outline: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+
+  &:hover {
+    border-color: rgb(28 28 28 / 0.3);
+  }
 
   &:focus-visible {
-    border-color: var(--color-ring);
-    box-shadow: 0 0 0 1px var(--color-ring);
+    border-color: var(--color-copper);
+    box-shadow: 0 0 0 1px var(--color-copper);
   }
 }
 
@@ -222,10 +238,17 @@
   color: var(--color-primary-foreground);
   font-size: 0.875rem;
   box-shadow: inset 0 0.5px 0 0 rgb(255 255 255 / 0.2), inset 0 0 0 0.5px rgb(0 0 0 / 0.2);
-  transition: opacity 180ms ease;
+  transition:
+    background-color 220ms ease,
+    transform 220ms ease;
 
   &:hover {
-    opacity: 0.85;
+    background-color: var(--color-copper-deep);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
@@ -237,10 +260,15 @@
   border: 1px solid var(--color-border-strong);
   background: transparent;
   color: var(--color-foreground);
-  transition: opacity 180ms ease;
+  transition:
+    border-color 220ms ease,
+    color 220ms ease,
+    background-color 220ms ease;
 
   &:hover {
-    opacity: 0.7;
+    border-color: var(--color-copper);
+    color: var(--color-copper-deep);
+    background-color: var(--color-copper-soft);
   }
 }
 
